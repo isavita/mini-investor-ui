@@ -1,5 +1,5 @@
 <template>
-  <p>You successfully invested: {{ 30.50 }}</p>
+  <p>You successfully invested: £ {{ this.$route.params.amount }}</p>
 </template>
 <script>
 export default {
