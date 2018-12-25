@@ -1,20 +1,24 @@
 <template>
-  <form
-    @submit.prevent="createInvestment"
-  >
-    <input name="campaign_id" type="hidden" :value="campaignId">
-    <p>
-      <label for="amount">Investment Amount</label>
-      <input
+  <div>
+    <b-form
+      @submit.prevent="createInvestment"
+      class="justify-content-center align-items-center"
+      inline
+    >
+      <input name="campaign_id" type="hidden" :value="campaignId">
+      <b-input
+        id="amount"
         type="number"
         v-model="amount"
         name="amount"
+        placeholder="Investment Amount"
         :min="investmentMultiplier"
         :step="investmentMultiplier"
-      >
-    </p>
-    <button type="submit">Invest</button>
-  </form>
+        required
+      />
+      <b-button type="submit">Invest</b-button>
+    </b-form>
+  </div>
 </template>
 <script>
 export default {
@@ -31,7 +35,7 @@ export default {
   },
   data() {
     return {
-      amount: 0,
+      amount: null,
     }
   },
   methods: {

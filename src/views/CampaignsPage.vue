@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <img class="investor-logo" alt="Investor logo" src="../assets/logo.jpg">
+  <div>
     <CampaignList/>
   </div>
 </template>
@@ -16,10 +15,3 @@ export default {
   }
 }
 </script>
-<style>
-.investor-logo {
-  max-width: 250px;
-  height: auto;
-}
-
-</style>

@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Campaigns</router-link>
-    </div>
+    <b-navbar variant="dark" type="dark" class="mb-4">
+      <b-navbar-brand tag="h1" class="mb-0" to="/">
+        Campaigns
+      </b-navbar-brand>
+    </b-navbar>
     <router-view/>
   </div>
 </template>
@@ -14,17 +16,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

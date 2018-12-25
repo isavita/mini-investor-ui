@@ -1,17 +1,30 @@
 <template>
-  <li class="campaign-item">
-    <p>{{ campaign.name }}</p>
-    <router-link
-      :to="{ name: 'NewInvestmentPage', params: { campaignId: campaign.id, investmentMultiplier: campaign.investmentMultiplier } }"
+  <router-link
+    :to="{ name: 'NewInvestmentPage', params: { campaignId: campaign.id, investmentMultiplier: campaign.investmentMultiplier } }"
+    class="card-link"
+  >
+    <b-card
+      :img-src="campaign.imageUrl"
+      :title="campaign.name"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem"
+      class="mb-4 h-100"
     >
-      <img :src="campaign.imageUrl" class="campaign-image" alt="No Image"/>
-    </router-link>
-    <p>{{ campaign.precentageRaised }}% raised</p>
-    <p>£ {{ campaign.targetAmount}}</p>
-    <p>{{ campaign.sector }}</p>
-    <p>{{ campaign.contry }}</p>
-    <p>£ {{ campaign.investmentMultiplier }}</p>
-  </li>
+      <b-list-group flush>
+       <b-list-group-item>£ {{ campaign.targetAmount}} Target</b-list-group-item>
+       <b-list-group-item>£ {{ campaign.investmentMultiplier }} Minimum investment</b-list-group-item>
+       <b-list-group-item>{{ campaign.sector }}</b-list-group-item>
+       <b-list-group-item>{{ campaign.contry }}</b-list-group-item>
+      </b-list-group>
+      <b-card-footer class="footer">
+        <b-progress height="20px" class="mb-2" :max="max" show-value>
+          <b-progress-bar :value="campaign.precentageRaised" variant="success"></b-progress-bar>
+        </b-progress>
+      </b-card-footer>
+    </b-card>
+  </router-link>
 </template>
 <script>
 export default {
@@ -24,14 +37,19 @@ export default {
         return true;
       }
     }
+  },
+  data() {
+    return {
+      max: 100
+    }
   }
 }
 </script>
 <style scoped>
-.campaign-image {
-  width: 250px;
+.list-group {
+  color: #000;
 }
-.campaign-item {
-  border: 1px solid black;
+.footer {
+  background-color: white;
 }
 </style>

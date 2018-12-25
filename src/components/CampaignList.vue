@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <h1>{{ name }}</h1>
-    <ul class="campaigns-list">
-      <CampaignListItem
-        v-for="campaign in campaigns"
-        :key="campaign.id"
-        :campaign="campaign"
-      />
-    </ul>
-    <button @click="reverseCampaignsList">Reverse campaign list</button>
+  <div class="container">
+    <b-row v-for="row in rowCount">
+      <b-col v-for="col in numberOfColumns">
+        <CampaignListItem
+          v-if="campaigns.length >= layoutCount(row, col)"
+          :key="campaignsLookup(row, col).id"
+          :campaign="campaignsLookup(row, col)"
+        />
+      </b-col>
+    </b-row>
+   <!--
+    <b-pagination size="md" :total-rows="100" v-model="currentPage" :per-page="12">
+    </b-pagination>
+   -->
   </div>
 </template>
 <script>
@@ -21,7 +25,7 @@ export default {
   },
   data() {
     return {
-      name: 'January Campaigns',
+      numberOfColumns: 3,
       campaigns: [
         {
           id: 1,
@@ -56,9 +60,17 @@ export default {
       ]
     };
   },
+  computed: {
+    rowCount() {
+      return Math.floor((this.campaigns.length - 1) / this.numberOfColumns) + 1
+    }
+  },
   methods: {
-    reverseCampaignsList: function() {
-      this.campaigns = this.campaigns.reverse();
+    layoutCount(row, col) {
+      return (row - 1) * this.numberOfColumns + col;
+    },
+    campaignsLookup(row, col) {
+      return this.campaigns[this.layoutCount(row, col) - 1];
     }
   }
 }
