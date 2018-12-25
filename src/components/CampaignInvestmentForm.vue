@@ -21,6 +21,8 @@
   </div>
 </template>
 <script>
+import ApiClient from '@/api-client'
+
 export default {
   name: 'CampaignInvestmentForm',
   props: {
@@ -40,25 +42,16 @@ export default {
   },
   methods: {
     createInvestment() {
-      // TODO: replace this with the actual backend API.
-      const BACKEND_URL = 'https://jsonplaceholder.typicode.com/todos';
-      fetch(BACKEND_URL, {
-        method: 'POST',
-        body: JSON.stringify({ title: 'todo 1' }),
-        headers: {
-          'Access-Control-Allow-Origin': 'https://jsonplaceholder.typicode.com',
-          'Content-type': 'application/json; charset=UTF-8'
-        }
-      }).then(response => response.json())
-        .then(json => {
-          this.$router.push({
-            path: 'investments/:id',
-            name: 'SuccessfulInvestmentPage',
-            params: { id: json['id'], amount: this.amount }
-          })
+      console.log(ApiClient)
+      const callback = (response) => {
+        this.$router.push({
+          path: 'investments/:id',
+          name: 'SuccessfulInvestmentPage',
+          params: { id: response.data['id'], amount: this.amount }
         })
-        .catch(error => console.log(error))
-    }
+      }
+      ApiClient.createInvestment({ title: 'todo 1' }, callback)
+   }
   }
 }
 </script>

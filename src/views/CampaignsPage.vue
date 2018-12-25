@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <CampaignList/>
+  <div class="container">
+    <CampaignList :currentPage="currentPage" />
+    <b-pagination
+      class="mt-5 justify-content-center"
+      size="lg"
+      v-model="currentPage"
+      :per-page="perPage"
+      :total-rows="100"
+    >
+    </b-pagination>
   </div>
 </template>
 
@@ -10,6 +18,12 @@ import CampaignList from '@/components/CampaignList.vue'
 
 export default {
   name: 'CampaignsPage',
+  data() {
+    return {
+      currentPage: 1,
+      perPage: 12,
+   };
+  },
   components: {
     CampaignList
   }
