@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'NewInvestmentPage', params: { campaignId: campaign.id, investmentMultiplier: campaign.investmentMultiplier } }"
+    :to="{ name: 'NewInvestmentPage', params: { campaignId: campaign.id, multiplierAmount: campaign.multiplierAmount } }"
     class="card-link"
   >
     <b-card
@@ -14,13 +14,13 @@
     >
       <b-list-group flush>
        <b-list-group-item>£ {{ campaign.targetAmount}} Target</b-list-group-item>
-       <b-list-group-item>£ {{ campaign.investmentMultiplier }} Minimum investment</b-list-group-item>
+       <b-list-group-item>£ {{ campaign.multiplierAmount }} Minimum investment</b-list-group-item>
        <b-list-group-item>{{ campaign.sector }}</b-list-group-item>
-       <b-list-group-item>{{ campaign.contry }}</b-list-group-item>
+       <b-list-group-item>{{ campaign.countryName }}</b-list-group-item>
       </b-list-group>
       <b-card-footer class="footer">
         <b-progress height="20px" class="mb-2" :max="max" show-value>
-          <b-progress-bar :value="campaign.precentageRaised" variant="success"></b-progress-bar>
+          <b-progress-bar :value="campaign.raisedPrecentage" variant="success"></b-progress-bar>
         </b-progress>
       </b-card-footer>
     </b-card>

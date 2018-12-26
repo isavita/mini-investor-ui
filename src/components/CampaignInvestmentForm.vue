@@ -12,8 +12,8 @@
         v-model="amount"
         name="amount"
         placeholder="Investment Amount"
-        :min="investmentMultiplier"
-        :step="investmentMultiplier"
+        :min="multiplierAmount"
+        :step="multiplierAmount"
         required
       />
       <b-button type="submit">Invest</b-button>
@@ -30,7 +30,7 @@ export default {
       type: Number,
       required: true
     },
-    investmentMultiplier: {
+    multiplierAmount: {
       type: Number,
       required: true
     }
@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     createInvestment() {
-      console.log(ApiClient)
       const callback = (response) => {
         this.$router.push({
           path: 'investments/:id',

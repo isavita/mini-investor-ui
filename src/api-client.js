@@ -1,23 +1,19 @@
-import axios from 'axios'
-
-const baseUrl = 'https://jsonplaceholder.typicode.com'
-
+const baseUrl = 'http://localhost:4000' //'https://jsonplaceholder.typicode.com'
+/*
 const headersCORS = {
-  'Access-Control-Allow-Origin': 'https://jsonplaceholder.typicode.com',
-  'Content-type': 'application/json; charset=UTF-8'
+  'Access-Control-Allow-Origin': 'http://localhost:4000',
+  'Access-Control-Allow-Headers': 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since,X-CSRF-Token',
+  'Content-Type': 'application/x-www-form-urlencoded'//'application/json; charset=UTF-8'
 }
+*/
 
 export default {
   createInvestment: function(data, success = x => x, failure = x => x) {
-    axios
-      .post(`${baseUrl}/todos`, data, {headers: headersCORS})
-      .then(response => success(response))
-      .catch(error => failure(error))
   },
-  getCampaings: function(page = 1, limit = 12, success = x => x, failure = x => x) {
-    axios
-      .get(`${baseUrl}/todos?_limit=${limit}&_page=${page}`)
-      .then(response => success(response))
+  getCampaings: function(page = 1, pageSize = 12, success = x => x, failure = x => x) {
+    fetch(`${baseUrl}/api/campaigns?page=${page}&page_size=${pageSize}`)
+      .then(response => response.json())
+      .then(data => success(data))
       .catch(error => failure(error))
   }
 }
