@@ -5,6 +5,14 @@
       class="justify-content-center align-items-center"
       inline
     >
+      <b-alert
+        variant="danger"
+        dismissible
+        fade
+        :show="showError" @dismissed="showError=false"
+      >
+        {{ errorMessage }}
+      </b-alert>
       <b-input
         id="amount"
         type="number"
@@ -33,23 +41,30 @@ export default {
     return {
       amount: null,
       multiplierAmount: null,
+      errorMessage: '',
+      showError: false,
     }
   },
   methods: {
     loadMultiplierAmount() {
       ApiClient.getCampaign(this.campaignId, response => {
-        this.multiplierAmount = response["multiplierAmount"]
+        this.multiplierAmount = response["multiplierAmount"] / 100.0
       })
     },
     createInvestment() {
       const callback = (response) => {
-        this.$router.push({
-          path: `investments/response['id']`,
-          name: 'SuccessfulInvestmentPage',
-          params: { amount: response['amount'] }
-        })
+        if (!response["errors"]) {
+          this.$router.push({
+            path: `investments/response['id']`,
+            name: 'SuccessfulInvestmentPage',
+            params: { amount: (response['amount'] / 100.0) }
+          })
+        } else {
+          this.showError = true
+          this.errorMessage = response["errors"]["detail"]
+        }
       }
-      const data = { campaignId: this.campaignId, amount: parseInt(this.amount) }
+      const data = { campaignId: this.campaignId, amount: parseInt(this.amount * 100) }
       ApiClient.createInvestment(data, callback)
     }
   },

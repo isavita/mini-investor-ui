@@ -52,4 +52,8 @@ export default {
 .footer {
   background-color: white;
 }
+.card-img-top {
+  height: 15rem;
+  object-fit: cover;
+}
 </style>
