@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'NewInvestmentPage', params: { campaignId: campaign.id, multiplierAmount: campaign.multiplierAmount } }"
+    :to="{ name: 'NewInvestmentPage', params: { id: campaign.id } }"
     class="card-link"
   >
     <b-card

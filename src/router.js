@@ -12,11 +12,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'campaigns-page',
+      name: 'CampaignsPage',
       component: CampaignsPage
     },
     {
-      path: '/investments/new',
+      path: '/campaigns/:id/investments/new',
       name: 'NewInvestmentPage',
       component: NewInvestmentPage,
       props: true

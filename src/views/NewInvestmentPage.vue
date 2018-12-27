@@ -1,8 +1,7 @@
 <template>
   <div class="investment">
     <CampaignInvestmentForm
-      :campaignId="this.$route.params.campaignId"
-      :multiplierAmount="this.$route.params.multiplierAmount"
+      :campaignId="$route.params.id"
     />
   </div>
 </template>

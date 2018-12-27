@@ -1,10 +1,16 @@
 <template>
   <b-alert variant="success" show>
-    <h4>You successfully invested: £ {{ this.$route.params.amount }}</h4>
+    <h4>You successfully invested: £ {{ amount }} pennies</h4>
   </b-alert>
 </template>
 <script>
 export default {
-  name: 'SuccessfulInvestmentPage'
+  name: 'SuccessfulInvestmentPage',
+  props: {
+    amount: {
+      type: Number,
+      required: true
+    }
+  }
 }
 </script>

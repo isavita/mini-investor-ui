@@ -5,13 +5,12 @@
       class="justify-content-center align-items-center"
       inline
     >
-      <input name="campaign_id" type="hidden" :value="campaignId">
       <b-input
         id="amount"
         type="number"
         v-model="amount"
         name="amount"
-        placeholder="Investment Amount"
+        placeholder="Investment Amount Pennies"
         :min="multiplierAmount"
         :step="multiplierAmount"
         required
@@ -27,30 +26,35 @@ export default {
   name: 'CampaignInvestmentForm',
   props: {
     campaignId: {
-      type: Number,
-      required: true
-    },
-    multiplierAmount: {
-      type: Number,
       required: true
     }
   },
   data() {
     return {
       amount: null,
+      multiplierAmount: null,
     }
   },
   methods: {
+    loadMultiplierAmount() {
+      ApiClient.getCampaign(this.campaignId, response => {
+        this.multiplierAmount = response["multiplierAmount"]
+      })
+    },
     createInvestment() {
       const callback = (response) => {
         this.$router.push({
-          path: 'investments/:id',
+          path: `investments/response['id']`,
           name: 'SuccessfulInvestmentPage',
-          params: { id: response.data['id'], amount: this.amount }
+          params: { amount: response['amount'] }
         })
       }
-      ApiClient.createInvestment({ title: 'todo 1' }, callback)
-   }
+      const data = { campaignId: this.campaignId, amount: parseInt(this.amount) }
+      ApiClient.createInvestment(data, callback)
+    }
+  },
+  created() {
+    this.loadMultiplierAmount()
   }
 }
 </script>
