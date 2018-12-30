@@ -1,8 +1,6 @@
+# Build stage
 # Install Alpine linux with Node
-FROM node:11.5.0-alpine
-
-# Install basic http server for assets
-RUN npm install -g http-server
+FROM node:11.5.0-alpine as build-stage
 
 # Create app directory and make it build directory for COPY, RUN, CMD etc.
 WORKDIR /app
@@ -19,8 +17,15 @@ COPY . .
 # Build the production version of the app in dist
 RUN npm run build
 
-# Expose port 8080
-EXPOSE 8080
+# Production stage
+# Install nginx
+FROM nginx:1.15.8-alpine as production-stage
 
-# Run the http-server
-CMD [ "http-server", "dist" ]
+# Copy /app/dist from the byild-stage to nginx's base directory
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Expose port 80 which is the default for nginx
+EXPOSE 80
+
+# Run nginx's server
+CMD ["nginx", "-g", "daemon off;"]
