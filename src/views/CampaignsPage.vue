@@ -35,7 +35,7 @@ export default {
     loadCampaings() {
       ApiClient.getCampaings(this.currentPage, this.perPage, (response) => {
         if (response.data && response.data['campaigns']) {
-          this.totalRows = response.data['totalEntries']
+          this.totalRows = response.meta['totalEntries']
           this.campaigns = response.data['campaigns'].map(campaign => {
             return {
               id: campaign['id'],
