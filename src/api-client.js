@@ -18,7 +18,7 @@ export default {
       .catch(error => failure(error))
   },
   getCampaings: function(page, pageSize, success = x => x, failure = x => x) {
-    fetch(`${baseUrl}/api/campaigns?page=${page}&page_size=${pageSize}`)
+    fetch(`${baseUrl}/api/campaigns?page=${page}&pageSize=${pageSize}`)
       .then(response => response.json())
       .then(data => success(data))
       .catch(error => failure(error))

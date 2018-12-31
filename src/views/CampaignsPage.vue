@@ -41,7 +41,7 @@ export default {
               id: campaign['id'],
               name: campaign['name'],
               imageUrl: campaign['imageUrl'],
-              raisedPrecentage: campaign['raisedPercentage'],
+              raisedPrecentage: parseFloat(campaign['raisedPercentage']),
               targetAmount: campaign['targetAmount'] / 100.0,
               sector: campaign['sector'],
               countryName: campaign['countryName'],
