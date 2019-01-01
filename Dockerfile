@@ -24,6 +24,12 @@ FROM nginx:1.15.8-alpine as production-stage
 # Copy /app/dist from the byild-stage to nginx's base directory
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
+# Remove default.conf of nginx
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy /app/nginx_config/nginx.conf to nginx's conf file
+COPY --from=build-stage /app/nginx_config/app.conf /etc/nginx/conf.d/app.conf
+
 # Expose port 80 which is the default for nginx
 EXPOSE 80
 
