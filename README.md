@@ -36,5 +36,6 @@ npm run build
 
 ### Swappable JSON APIs implemented in following repositories
 
+  * __Ruby__ implementation with Rails ([repository](https://github.com/isavita/mini-investor-api-rb))
   * __Elixir__ implementation with Phoenix ([repository](https://github.com/isavita/mini-investor-api-ex))
 
